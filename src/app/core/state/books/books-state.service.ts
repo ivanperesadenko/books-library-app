@@ -17,8 +17,22 @@ export class BooksStateService {
     return this.booksSignal().find(book => book.id === id) || null;
   }
 
-  public getList(): Book[] {
-    return this.booksSignal();
+  public getList(searchTerm = ''): Book[] {
+    const books = this.booksSignal();
+    const searchPropertyKeys: (keyof Book)[] = ['title', 'author'];
+
+    if (!searchTerm) return books;
+
+    const lowerSearchTerm: string = searchTerm.toLowerCase();
+
+    return books.filter((book: Book) => {
+      return searchPropertyKeys.some((propertyKey: keyof Book) => {
+        const value = book[propertyKey];
+        if (!value) return false;
+
+        return (value as string).toLowerCase().includes(lowerSearchTerm);
+      });
+    });
   }
 
   public add(book: Book): void {
