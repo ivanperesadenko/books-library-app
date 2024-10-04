@@ -16,7 +16,8 @@
             fadeOutDelay: (filteredBooks().length - idx) * 80
           }
         }"
-        [book]="book">
+        [book]="book"
+        (removeBook)="removeBook($event)">
       </bl-book-card>
     }
   </div>

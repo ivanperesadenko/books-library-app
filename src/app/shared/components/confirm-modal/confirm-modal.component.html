@@ -1,0 +1,14 @@
+<div class="dialog-container">
+  <div class="dialog-title">
+    {{ title }}
+  </div>
+
+  <div class="dialog-content">
+    {{ description }}
+  </div>
+
+  <div class="dialog-actions">
+    <button mat-flat-button [color]="'warn'" [mat-dialog-close]="false">Cancel</button>
+    <button mat-flat-button [color]="'accent'" [mat-dialog-close]="true">Approve</button>
+  </div>
+</div>

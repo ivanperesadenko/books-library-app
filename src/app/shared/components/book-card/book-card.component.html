@@ -1,5 +1,9 @@
 <mat-card class="book-card" blHoverTrigger (hoverTrigger)="cardHover.set($event)">
-  <ng-container *ngTemplateOutlet="book().imagePath ? withImage : noImage"></ng-container>
+
+  <bl-book-image
+    [imagePath]="book().imagePath"
+    [altText]="book().title">
+  </bl-book-image>
 
   <mat-card-content class="card-content">
     <mat-card-title [matTooltip]="book().title" blDisableTooltipIfEllipsis>{{ book().title }}</mat-card-title>
@@ -17,26 +21,11 @@
   </mat-card-content>
 
   @if (cardHover()) {
-    <mat-card-actions @actionShow class="dropdown-actions">
-      <button mat-mini-fab [color]="'accent'">
-        <mat-icon>edit</mat-icon>
-      </button>
-
-      <button mat-mini-fab [color]="'warn'">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </mat-card-actions>
+    <bl-book-actions
+      (deleteBook)="deleteBookHandler()"
+      (openDetails)="openBookDetails()">
+    </bl-book-actions>
   }
 </mat-card>
 
-<ng-template #noImage>
-  <div class="image-container no-image">
-    <img mat-card-image [src]="bookImagePath()" [alt]="'no image'">
-  </div>
-</ng-template>
 
-<ng-template #withImage>
-  <div class="image-container">
-    <img mat-card-image [src]="bookImagePath()" [alt]="book().title">
-  </div>
-</ng-template>

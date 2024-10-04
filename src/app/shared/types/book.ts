@@ -4,5 +4,5 @@ export interface Book {
   authorName: string;
   releaseDate: string;
   description: string;
-  imagePath?: string;
+  imagePath: string | null;
 }

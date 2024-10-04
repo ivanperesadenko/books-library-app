@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BooksStateService } from '@states/books/books-state.service';
-import { delay, map, Observable, of } from 'rxjs';
+import { delay, map, Observable, of, tap } from 'rxjs';
 import { Book } from '@shared/types';
 
-const FAKE_REQUEST_DELAY = 2000;
+const FAKE_REQUEST_DELAY = 500;
 
 @Injectable({
   providedIn: 'root',
@@ -31,10 +31,11 @@ export class BooksFakeApiService {
     );
   }
 
-  public deleteBook(id: number): Observable<void> {
+  public deleteBook(id: number): Observable<boolean> {
     return of(id).pipe(
       delay(FAKE_REQUEST_DELAY),
-      map(() => this.booksStateService.delete(id))
+      tap(() => this.booksStateService.delete(id)),
+      map(() => true)
     );
   }
 }

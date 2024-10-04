@@ -1,0 +1,23 @@
+.image-container {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background-color: #454545;
+  &.no-image {
+    img {
+      height: 120px;
+    }
+  }
+
+  &:not(.no-image) {
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}

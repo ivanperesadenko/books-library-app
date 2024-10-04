@@ -2,20 +2,23 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
+  OnDestroy,
   OnInit,
   signal,
   Signal,
   WritableSignal,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Book } from '@shared/types';
-import { BooksStateService } from '@states/books/books-state.service';
-import { BookCardComponent } from '@shared/components/book-card/book-card.component';
-import { BooksFilterComponent } from '@features/books/components/books-filter/books-filter.component';
-import { BooksFilterPipe } from '@features/books/pipes/books-filter.pipe';
-import { animate, style, transition, trigger } from '@angular/animations';
-import { createBookAnimation } from '@features/books/animations/book.animation';
 import { NgStyle } from '@angular/common';
+import { BooksStateService } from '@states/books/books-state.service';
+import { BooksFilterPipe } from '@features/books/pipes/books-filter.pipe';
+import { createBookAnimation } from '@features/books/animations/book.animation';
+import { BooksFilterComponent } from '@features/books/components/books-filter/books-filter.component';
+import { BookCardComponent } from '@shared/components/book-card/book-card.component';
+import { Book } from '@shared/types';
+import { BooksFakeApiService } from '@states/books/books-fake-api.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'bl-books',
@@ -27,33 +30,28 @@ import { NgStyle } from '@angular/common';
   providers: [BooksFilterPipe],
   animations: [createBookAnimation()],
 })
-export class BooksComponent implements OnInit {
-  public books!: Signal<Book[]>;
-  public filteredBooks!: Signal<Book[]>;
+export class BooksComponent implements OnDestroy {
+  private route = inject(ActivatedRoute);
+  private state = inject(BooksStateService);
+  private fakeApi = inject(BooksFakeApiService);
+  private booksFilterPipe = inject(BooksFilterPipe);
+
+  public books: Signal<Book[]> = this.state.booksSignal;
+  public filteredBooks: Signal<Book[]> = computed(() => {
+    return this.booksFilterPipe.transform(this.books(), this.searchTerm());
+  });
   public searchTerm: WritableSignal<string> = signal<string>('');
 
-  public pageTitle!: string;
+  public pageTitle: string = this.route.snapshot.routeConfig?.title as string;
 
-  constructor(
-    private route: ActivatedRoute,
-    private state: BooksStateService,
-    private booksFilterPipe: BooksFilterPipe
-  ) {
-    this.books = this.state.booksSignal;
-    this.filteredBooks = computed(() => {
-      return this.booksFilterPipe.transform(this.books(), this.searchTerm());
-    });
+  private destroy$: Subject<void> = new Subject<void>();
+
+  public removeBook(id: number): void {
+    this.fakeApi.deleteBook(id).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
-  public ngOnInit(): void {
-    this.setTitle();
-  }
-
-  private setTitle(): void {
-    this.pageTitle = this.route.snapshot.routeConfig?.title as string;
-  }
-
-  public setSearchTerm(event: unknown): void {
-    console.log(event);
+  public ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
