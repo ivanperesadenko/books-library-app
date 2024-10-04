@@ -24,13 +24,14 @@ import {
   NgStyle,
   NgTemplateOutlet,
 } from '@angular/common';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatMiniFabButton } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
 import { isTextTruncated } from '@utils';
 import { DisableTooltipIfEllipsisDirective } from '@shared/directives/disable-tooltip-if-ellipsis.directive';
 import { MatDivider } from '@angular/material/divider';
 import { HoverTriggerDirective } from '@shared/directives/hover-trigger.directive';
 import { createBookActionsAnimation } from '@shared/components/book-card/animations/book-actions-container.animation';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'bl-book-card',
@@ -53,6 +54,8 @@ import { createBookActionsAnimation } from '@shared/components/book-card/animati
     MatDivider,
     NgStyle,
     HoverTriggerDirective,
+    MatMiniFabButton,
+    MatIcon,
   ],
   templateUrl: './book-card.component.html',
   styleUrl: './book-card.component.scss',

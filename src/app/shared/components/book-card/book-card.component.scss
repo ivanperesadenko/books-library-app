@@ -15,6 +15,7 @@ mat-card {
   transition: .1s ease-in;
   box-shadow: none;
   border-radius: 0;
+  overflow: hidden;
 }
 
 mat-card-content.card-content {
@@ -96,11 +97,16 @@ mat-card-subtitle, mat-card-content {
   overflow: hidden;
   height: 60px;
   width: 100%;
-  background-color: var(--mdc-elevated-card-container-color);
-  top: 100%;
+  top: 0;
   left: 0;
   z-index: 2;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  background-color: rgba(0, 0, 0, .15);
+  backdrop-filter: blur(2px);
+
+  .action-btn {
+    height: 38px;
+  }
 }
