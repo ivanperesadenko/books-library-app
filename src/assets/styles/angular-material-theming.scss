@@ -1,3 +1,15 @@
+
 :root {
-  --mat-toolbar-container-background-color: #d7e3ff;
+  --mat-toolbar-container-background-color: #454545;
+  --mdc-elevated-card-container-color: #39393b;
+
+  // MatInput colors
+  --mdc-filled-text-field-container-color: #39393b;
+  --mdc-filled-text-field-focus-label-text-color: #ecf0f1;
+  --mdc-filled-text-field-hover-label-text-color: #a2a2a2;
+  --mdc-filled-text-field-focus-active-indicator-color: #ecf0f1;
+  --mdc-filled-text-field-active-indicator-color: #ecf0f1;
+  --mdc-filled-text-field-caret-color: #ecf0f1;
+  --mdc-filled-text-field-input-text-color: #ecf0f1;
+  --mdc-filled-text-field-label-text-color: #a2a2a2;
 }

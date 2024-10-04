@@ -1,0 +1,38 @@
+<mat-card class="book-card" blHoverTrigger (hoverTrigger)="cardHover.set($event)">
+  <ng-container *ngTemplateOutlet="book().imagePath ? withImage : noImage"></ng-container>
+
+  <mat-card-content class="card-content">
+    <mat-card-title [matTooltip]="book().title" blDisableTooltipIfEllipsis>{{ book().title }}</mat-card-title>
+
+    <mat-card-subtitle>
+      <div class="book-subtitle">
+        <div [matTooltip]="book().authorName" blDisableTooltipIfEllipsis>
+          <span class="label">Author: </span> <i>{{ book().authorName }}</i>
+        </div>
+        <div [matTooltip]="book().releaseDate" blDisableTooltipIfEllipsis>
+          <span class="label">Release Date: </span> <i>{{ book().releaseDate }}</i>
+        </div>
+      </div>
+    </mat-card-subtitle>
+  </mat-card-content>
+
+  @if (cardHover()) {
+    <mat-divider></mat-divider>
+    <mat-card-actions @actionShow class="dropdown-actions">
+      <button mat-flat-button [color]="'warn'">Delete</button>
+      <button mat-flat-button [color]="'accent'">Update</button>
+    </mat-card-actions>
+  }
+</mat-card>
+
+<ng-template #noImage>
+  <div class="image-container no-image">
+    <img mat-card-image [src]="bookImagePath()" [alt]="'no image'">
+  </div>
+</ng-template>
+
+<ng-template #withImage>
+  <div class="image-container">
+    <img mat-card-image [src]="bookImagePath()" [alt]="book().title">
+  </div>
+</ng-template>

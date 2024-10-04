@@ -11,12 +11,6 @@ const FAKE_REQUEST_DELAY = 2000;
 export class BooksFakeApiService {
   constructor(private booksStateService: BooksStateService) {}
 
-  public getBooks(): Observable<Book[]> {
-    const books: Book[] = this.booksStateService.getList();
-
-    return of(books).pipe(delay(FAKE_REQUEST_DELAY));
-  }
-
   public getBookById(id: number): Observable<Book | null> {
     const book: Book | null = this.booksStateService.getById(id);
 

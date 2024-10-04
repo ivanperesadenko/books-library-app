@@ -1,0 +1,14 @@
+.filter-container {
+  display: flex;
+  justify-content: center;
+
+  mat-form-field.example-full-width {
+    width: 500px;
+    margin-bottom: 20px;
+    transition: .1s ease-in;
+
+    @media screen and (max-width: 550px) {
+      width: 100%;
+    }
+  }
+}
