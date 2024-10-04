@@ -29,7 +29,8 @@
       "@core-components/*": ["app/core/components/*"],
       "@shared/*": ["app/shared/*"],
       "@features/*": ["app/features/*"],
-      "@mocks/*": ["app/mocks/*"]
+      "@mocks/*": ["app/mocks/*"],
+      "@utils": ["app/utils"],
     }
   },
   "angularCompilerOptions": {
