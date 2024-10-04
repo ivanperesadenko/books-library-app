@@ -2,11 +2,17 @@
 const eslint = require('@eslint/js');
 const tseslint = require('typescript-eslint');
 const angular = require('angular-eslint');
-
+const globals = require('globals');
 module.exports = tseslint.config(
   {
     ignores: ['dist/**', 'node_modules/**'],
     files: ['**/*.ts'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.mocha,
+      },
+    },
     extends: [
       eslint.configs.recommended,
       ...tseslint.configs.recommended,
