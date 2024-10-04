@@ -1,0 +1,44 @@
+.content-container {
+  max-width: 1160px;
+  margin: 0 auto;
+}
+
+.content {
+  display: grid;
+  width: auto;
+  margin: 0 auto;
+  grid-template-columns: repeat(12, minmax(auto, 60px));
+  gap: 40px;
+
+  bl-book-card {
+    grid-column-end: span 3;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .content {
+    gap: 30px;
+    bl-book-card {
+      grid-column-end: span 4;
+    }
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .content {
+    gap: 20px;
+    bl-book-card {
+      grid-column-end: span 6;
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .content {
+    max-width: 300px;
+    margin: 0 auto;
+    bl-book-card {
+      grid-column-end: span 12;
+    }
+  }
+}

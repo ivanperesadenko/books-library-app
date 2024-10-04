@@ -1,0 +1,23 @@
+<div class="content-container">
+  <h1>{{ pageTitle }}</h1>
+
+  <bl-books-filter [(searchTerm)]="searchTerm"></bl-books-filter>
+
+  <div class="content">
+    @for (book of filteredBooks(); track book.id; let idx = $index) {
+      <bl-book-card
+        [ngStyle]="{
+          zIndex: filteredBooks().length - idx
+        }"
+        [@bookAnimation]="{
+          value: '',
+          params: {
+            fadeInDelay: idx * 80,
+            fadeOutDelay: (filteredBooks().length - idx) * 80
+          }
+        }"
+        [book]="book">
+      </bl-book-card>
+    }
+  </div>
+</div>
