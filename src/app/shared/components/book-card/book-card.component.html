@@ -14,17 +14,17 @@
           <span class="label">Author: </span> <i>{{ book().authorName }}</i>
         </div>
         <div [matTooltip]="book().releaseDate" blDisableTooltipIfEllipsis>
-          <span class="label">Release Date: </span> <i>{{ book().releaseDate }}</i>
+          <span class="label">Release Date: </span> <i>{{ book().releaseDate | date: 'MMMM YYYY' }}</i>
         </div>
       </div>
     </mat-card-subtitle>
   </mat-card-content>
 
   @if (cardHover()) {
-    <bl-book-actions
-      (deleteBook)="deleteBookHandler()"
-      (openDetails)="openBookDetails()">
-    </bl-book-actions>
+    <bl-top-actions
+      (remove)="deleteBookHandler()"
+      (edit)="openBookDetails()">
+    </bl-top-actions>
   }
 </mat-card>
 

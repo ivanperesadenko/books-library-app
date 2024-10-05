@@ -27,10 +27,13 @@
     "paths": {
       "@states/*": ["app/core/state/*"],
       "@core-components/*": ["app/core/components/*"],
+      "@core-services/*": ["app/core/services/*"],
       "@shared/*": ["app/shared/*"],
       "@features/*": ["app/features/*"],
       "@mocks/*": ["app/mocks/*"],
       "@utils": ["app/utils"],
+      "@configs": ["app/configs"],
+      "@custom-providers": ["app/custom-providers"],
     }
   },
   "angularCompilerOptions": {

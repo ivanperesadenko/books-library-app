@@ -1,0 +1,23 @@
+@if (isTopBarActive()) {
+  <mat-card-actions @actionShow class="dropdown-actions">
+    @if(canEdit()) {
+      <button
+        mat-mini-fab
+        [type]="'button'"
+        [color]="'accent'"
+        (click)="edit.emit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    }
+
+    @if (canRemove()) {
+      <button
+        mat-mini-fab
+        [type]="'button'"
+        [color]="'warn'"
+        (click)="remove.emit()">
+        <mat-icon>delete</mat-icon>
+      </button>
+    }
+  </mat-card-actions>
+}

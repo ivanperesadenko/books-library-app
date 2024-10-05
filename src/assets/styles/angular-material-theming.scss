@@ -12,6 +12,33 @@
   --mdc-filled-text-field-caret-color: #ecf0f1;
   --mdc-filled-text-field-input-text-color: #ecf0f1;
   --mdc-filled-text-field-label-text-color: #a2a2a2;
+  --mdc-filled-text-field-input-text-placeholder-color: #a2a2a2;
+  --mdc-snackbar-container-color: #489218;
+  --mdc-icon-button-icon-color: #ecf0f1;
+  --mdc-outlined-button-outline-color: #ecf0f1;
+  --mdc-outlined-button-label-text-color: #ecf0f1;
 
   --mdc-dialog-container-color: #454545;
+}
+
+mat-dialog-container .mat-mdc-dialog-surface {
+  overflow-x: hidden;
+}
+
+mat-icon.white {
+  --mat-icon-color: #ecf0f1;
+}
+
+button.custom-outlined-button.mat-mdc-outlined-button:not(:disabled) {
+  color: var(--main-text-color);
+  border-color: var(--main-text-color);
+  background: none;
+  transition: .1s ease-in;
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Change background color on hover */
+  }
+}
+
+button.mat-mdc-outlined-button .mat-mdc-button-persistent-ripple::before {
+  background-color: transparent;
 }

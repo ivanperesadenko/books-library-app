@@ -1,0 +1,36 @@
+<div class="dialog-container">
+  <div class="dialog-content">
+    <bl-book-image
+      [imagePath]="book().imagePath"
+      [editable]="false"
+      [containByHeight]="true">
+    </bl-book-image>
+
+    <div class="book-title">
+      {{ book().title }}
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="book-info">
+      <span class="label">Author: </span>
+      <span class="value"><strong>{{ book().authorName }}</strong></span>
+    </div>
+
+    <div class="book-info">
+      <span class="label">Release date: </span>
+      <span class="value"><strong>{{ book().releaseDate | date: 'DD MMMM YYYY' }}</strong></span>
+    </div>
+
+    <div class="book-info">
+      <span class="label">Description: </span>
+      <span class="value"><i>{{ book().description }}</i></span>
+    </div>
+  </div>
+
+  <div class="dialog-actions">
+    <button class="custom-outlined-button" mat-stroked-button [color]="'accent'" [disableRipple]="true" [matDialogClose]="null">Close</button>
+    <button mat-flat-button [color]="'warn'" (click)="deleteBookHandler()">Delete</button>
+    <button mat-flat-button [color]="'primary'" (click)="editBook()">Edit</button>
+  </div>
+</div>

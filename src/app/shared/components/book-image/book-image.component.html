@@ -1,0 +1,28 @@
+<div
+  class="image"
+  blHoverTrigger
+  [class.contain]="containByHeight()"
+  [class.editable]="editable()"
+  [hoverDetectionDisabled]="!editable()"
+  (hoverTrigger)="imageHover.set($event)">
+
+  <input #inputFile [type]="'file'" [accept]="'image/*'" [hidden]="true" (change)="changeImage($event)">
+
+  @if (imageHover()) {
+    <bl-top-actions [canRemove]="!!imagePath()" (edit)="triggerFileInput()" (remove)="removeImage()"></bl-top-actions>
+  }
+
+  <ng-container *ngTemplateOutlet="imagePath() ? withImage : noImage"></ng-container>
+</div>
+
+<ng-template #noImage>
+  <div class="image-container no-image">
+    <img [src]="bookImagePath()" [alt]="altText()">
+  </div>
+</ng-template>
+
+<ng-template #withImage>
+  <div class="image-container">
+    <img [src]="bookImagePath()" [alt]="altText()">
+  </div>
+</ng-template>

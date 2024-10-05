@@ -13,6 +13,10 @@
   bl-book-card {
     grid-column-end: span 3;
   }
+
+  bl-empty-list {
+    grid-column-end: span 12;
+  }
 }
 
 @media only screen and (max-width: 1000px) {

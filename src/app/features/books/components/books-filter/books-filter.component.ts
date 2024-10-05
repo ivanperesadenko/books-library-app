@@ -1,5 +1,16 @@
-import { Component, model, OnDestroy, OnInit } from '@angular/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  model,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  MatFormField,
+  MatLabel,
+  MatPrefix,
+  MatSuffix,
+} from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import {
@@ -10,19 +21,29 @@ import {
   takeUntil,
   tap,
 } from 'rxjs';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'bl-books-filter',
   standalone: true,
-  imports: [MatFormField, MatInput, MatLabel, ReactiveFormsModule],
+  imports: [
+    MatFormField,
+    MatInput,
+    MatLabel,
+    ReactiveFormsModule,
+    MatIcon,
+    MatPrefix,
+    MatSuffix,
+  ],
   templateUrl: './books-filter.component.html',
   styleUrl: './books-filter.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BooksFilterComponent implements OnInit, OnDestroy {
-  private destroySubject = new Subject<void>();
-
   public readonly searchTerm = model.required<string>();
   public readonly searchTermControl = new FormControl<string>('');
+
+  private readonly destroy$ = new Subject<void>();
 
   public ngOnInit(): void {
     this.listenSearchTerm();
@@ -35,15 +56,15 @@ export class BooksFilterComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         filter(searchTerm => typeof searchTerm === 'string'),
         tap((searchTerm: string) => {
-          console.log(searchTerm);
           this.searchTerm.set(searchTerm);
         }),
-        takeUntil(this.destroySubject)
+        takeUntil(this.destroy$)
       )
       .subscribe();
   }
 
   public ngOnDestroy(): void {
-    this.destroySubject.next();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

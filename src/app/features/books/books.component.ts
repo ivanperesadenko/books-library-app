@@ -3,8 +3,6 @@ import {
   Component,
   computed,
   inject,
-  OnDestroy,
-  OnInit,
   signal,
   Signal,
   WritableSignal,
@@ -13,27 +11,30 @@ import { ActivatedRoute } from '@angular/router';
 import { NgStyle } from '@angular/common';
 import { BooksStateService } from '@states/books/books-state.service';
 import { BooksFilterPipe } from '@features/books/pipes/books-filter.pipe';
-import { createBookAnimation } from '@features/books/animations/book.animation';
+import { createFadeAnimation } from '@shared/animations/fade.animation';
 import { BooksFilterComponent } from '@features/books/components/books-filter/books-filter.component';
 import { BookCardComponent } from '@shared/components/book-card/book-card.component';
 import { Book } from '@shared/types';
-import { BooksFakeApiService } from '@states/books/books-fake-api.service';
-import { Subject, takeUntil } from 'rxjs';
+import { EmptyListComponent } from '@features/books/components/empty-list/empty-list.component';
 
 @Component({
   selector: 'bl-books',
   standalone: true,
-  imports: [BookCardComponent, BooksFilterComponent, NgStyle],
+  imports: [
+    BookCardComponent,
+    BooksFilterComponent,
+    NgStyle,
+    EmptyListComponent,
+  ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [BooksFilterPipe],
-  animations: [createBookAnimation()],
+  animations: [createFadeAnimation()],
 })
-export class BooksComponent implements OnDestroy {
+export class BooksComponent {
   private route = inject(ActivatedRoute);
   private state = inject(BooksStateService);
-  private fakeApi = inject(BooksFakeApiService);
   private booksFilterPipe = inject(BooksFilterPipe);
 
   public books: Signal<Book[]> = this.state.booksSignal;
@@ -43,15 +44,4 @@ export class BooksComponent implements OnDestroy {
   public searchTerm: WritableSignal<string> = signal<string>('');
 
   public pageTitle: string = this.route.snapshot.routeConfig?.title as string;
-
-  private destroy$: Subject<void> = new Subject<void>();
-
-  public removeBook(id: number): void {
-    this.fakeApi.deleteBook(id).pipe(takeUntil(this.destroy$)).subscribe();
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
 }

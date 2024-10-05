@@ -1,17 +1,23 @@
-import { Directive, HostListener, output } from '@angular/core';
+import { Directive, HostListener, input, output } from '@angular/core';
 
 @Directive({
   selector: '[blHoverTrigger]',
   standalone: true,
 })
 export class HoverTriggerDirective {
+  public hoverDetectionDisabled = input<boolean>(false);
+
   public hoverTrigger = output<boolean>();
 
   @HostListener('mouseenter') public mouseEnter(): void {
-    this.hoverTrigger.emit(true);
+    if (!this.hoverDetectionDisabled()) {
+      this.hoverTrigger.emit(true);
+    }
   }
 
   @HostListener('mouseleave') public mouseLeave(): void {
-    this.hoverTrigger.emit(false);
+    if (!this.hoverDetectionDisabled()) {
+      this.hoverTrigger.emit(false);
+    }
   }
 }

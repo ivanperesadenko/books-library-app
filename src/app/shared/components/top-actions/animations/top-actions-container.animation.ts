@@ -6,7 +6,7 @@ import {
   animate,
 } from '@angular/animations';
 
-export const createBookActionsAnimation = (): AnimationTriggerMetadata => {
+export const createTopActionsAnimation = (): AnimationTriggerMetadata => {
   return trigger('actionShow', [
     transition(':enter', [
       style({ opacity: 0, transform: 'translateY(-60px)' }),

@@ -9,16 +9,24 @@
         [ngStyle]="{
           zIndex: filteredBooks().length - idx
         }"
-        [@bookAnimation]="{
+        [@fadeWithDelay]="{
           value: '',
           params: {
             fadeInDelay: idx * 80,
             fadeOutDelay: (filteredBooks().length - idx) * 80
           }
         }"
-        [book]="book"
-        (removeBook)="removeBook($event)">
+        [book]="book">
       </bl-book-card>
+    } @empty {
+      <bl-empty-list
+        [@fadeWithDelay]="{
+          value: '',
+          params: {
+            fadeInDelay: (books().length + 1) * 80,
+            fadeOutDelay: 0
+          }
+        }"></bl-empty-list>
     }
   </div>
 </div>

@@ -7,6 +7,9 @@
   position: relative;
   overflow: hidden;
   background-color: #454545;
+  img {
+    -webkit-user-drag: none;
+  }
   &.no-image {
     img {
       height: 120px;
@@ -18,6 +21,27 @@
       height: 100%;
       width: 100%;
       object-fit: cover;
+    }
+  }
+}
+
+.image {
+  overflow: hidden;
+  position: relative;
+  &.editable {
+    cursor: pointer;
+  }
+
+  &.contain {
+    .image-container {
+      background-color: inherit;
+      &:not(.no-image) {
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
     }
   }
 }

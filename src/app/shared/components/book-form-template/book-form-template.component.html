@@ -1,0 +1,40 @@
+<bl-book-image
+  class="'book-image'"
+  [imagePath]="imagePath"
+  [editable]="true"
+  (imageChanged)="setImagePath($event)">
+</bl-book-image>
+
+<mat-form-field class="control">
+  <mat-label>Book title</mat-label>
+  <input
+    matInput
+    [formControlName]="'title'"
+    [placeholder]="'Enter a book title'">
+</mat-form-field>
+
+<mat-form-field class="control">
+  <mat-label>Author Name</mat-label>
+  <input
+    matInput
+    [formControlName]="'authorName'"
+    [placeholder]="'Enter author name'">
+</mat-form-field>
+
+<mat-form-field class="control">
+  <mat-label>Release date</mat-label>
+  <input matInput [matDatepicker]="picker" [formControlName]="'releaseDate'" />
+  <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field class="control">
+  <mat-label>Description</mat-label>
+  <textarea
+    matInput
+    [formControlName]="'description'"
+    [cdkTextareaAutosize]="true"
+    [cdkAutosizeMinRows]="3"
+    [placeholder]="'Enter description'">
+  </textarea>
+</mat-form-field>

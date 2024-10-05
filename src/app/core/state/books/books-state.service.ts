@@ -1,4 +1,5 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
+
 import { Book } from '@shared/types';
 import { initialBooks } from '@mocks/books';
 
@@ -13,10 +14,6 @@ export class BooksStateService {
     this.booksSignal.set([...books]);
   }
 
-  public getById(id: number): Book | null {
-    return this.booksSignal().find(book => book.id === id) || null;
-  }
-
   public add(book: Book): void {
     this.booksSignal.update((books: Book[]) => [...books, book]);
   }
@@ -29,7 +26,7 @@ export class BooksStateService {
     );
   }
 
-  public delete(id: number): void {
+  public delete(id: string): void {
     this.booksSignal.update((books: Book[]) =>
       books.filter(book => book.id !== id)
     );

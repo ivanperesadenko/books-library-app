@@ -1,0 +1,13 @@
+:host {
+  width: 100%;
+
+  mat-form-field.control {
+    width: 100%;
+    display: block;
+  }
+
+  bl-book-image {
+    display: block;
+    margin-bottom: 20px;
+  }
+}

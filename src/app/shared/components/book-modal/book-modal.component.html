@@ -1,0 +1,14 @@
+<div class="dialog-container">
+  <div class="dialog-content">
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+      <bl-book-form-template></bl-book-form-template>
+
+      <div class="dialog-actions">
+        <button mat-flat-button [color]="'warn'">Cancel</button>
+        <button mat-flat-button [color]="'accent'" [type]="'submit'">
+          {{ isCreate ? 'Create a book' : 'Update the book' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
