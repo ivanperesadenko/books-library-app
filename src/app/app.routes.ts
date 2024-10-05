@@ -9,7 +9,11 @@ export const routes: Routes = [
   },
   {
     path: 'books',
-    component: BooksComponent,
+    component: BooksComponent, // There is no point in lazy loading the component since we only have one page
     title: `Books list`,
+  },
+  {
+    path: '**',
+    redirectTo: 'books',
   },
 ];
